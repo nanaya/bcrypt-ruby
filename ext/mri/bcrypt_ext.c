@@ -38,7 +38,7 @@ static VALUE bc_crypt(VALUE self, VALUE key, VALUE setting) {
     if(NIL_P(key) || NIL_P(setting)) return Qnil;
 
     value = crypt_ra(
-	    NIL_P(key) ? NULL : StringValuePtr(key),
+	    NIL_P(key) ? NULL : StringValueCStr(key),
 	    NIL_P(setting) ? NULL : StringValuePtr(setting),
 	    &data,
 	    &size);

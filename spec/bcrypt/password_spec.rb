@@ -26,6 +26,10 @@ describe "Creating a hashed password" do
     expect { BCrypt::Password.create( ""         ) }.not_to raise_error
     expect { BCrypt::Password.create( String.new ) }.not_to raise_error
   end
+
+  specify "blows up when null bytes are in the string" do
+    expect { BCrypt::Password.create( "foo\0bar".chop  ) }.to raise_error
+  end
 end
 
 describe "Reading a hashed password" do
