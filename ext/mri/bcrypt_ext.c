@@ -1,5 +1,5 @@
 #include <ruby.h>
-#include <ow-crypt.h>
+#include "bcrypt_ruby.h"
 
 static VALUE mBCrypt;
 static VALUE cBCryptEngine;
@@ -10,7 +10,7 @@ static VALUE bc_salt(VALUE self, VALUE prefix, VALUE count, VALUE input) {
     char * salt;
     VALUE str_salt;
 
-    salt = crypt_gensalt_ra(
+    salt = bcrypt_ruby_crypt_gensalt_ra(
 	    StringValuePtr(prefix),
 	    NUM2ULONG(count),
 	    NIL_P(input) ? NULL : StringValuePtr(input),
@@ -37,7 +37,7 @@ static VALUE bc_crypt(VALUE self, VALUE key, VALUE setting) {
 
     if(NIL_P(key) || NIL_P(setting)) return Qnil;
 
-    value = crypt_ra(
+    value = bcrypt_ruby_crypt_ra(
 	    NIL_P(key) ? NULL : StringValuePtr(key),
 	    NIL_P(setting) ? NULL : StringValuePtr(setting),
 	    &data,

@@ -14,7 +14,7 @@ else
 
   # From Openwall's crypt_blowfish Makefile.
   # This is `bcrypt_ext` (our extension) + CRYPT_OBJS from that Makefile.
-  $objs = %w(bcrypt_ext.o crypt_blowfish.o x86.o crypt_gensalt.o wrapper.o)
+  $objs = %w(bcrypt_ext.o bcrypt_ruby.o crypt_blowfish.o x86.o crypt_gensalt.o wrapper.o)
 
   dir_config("bcrypt_ext")
   create_makefile("bcrypt_ext")
